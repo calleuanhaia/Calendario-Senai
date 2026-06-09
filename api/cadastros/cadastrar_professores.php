@@ -4,11 +4,11 @@
     if($_SERVER['REQUEST_METHOD']=='POST'){
         $nome = $_POST['nome'];
         $email = $_POST['email'];
-        $matricula = $_POST['matricula'];
         $senha = $_POST['senha'];
+        $idp = $_POST['idp'];
 
         try{
-            $cadastrar="INSERT INTO alunos (nome,email,senha,matricula) VALUES ('$nome','$email','$senha',$matricula)";
+            $cadastrar="INSERT INTO professores (nome,email,senha,idp) VALUES ('$nome','$email','$senha',$idp)";
             $env=$pdo->prepare($cadastrar);
             $env->execute();
 

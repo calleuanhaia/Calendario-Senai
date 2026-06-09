@@ -1,3 +1,6 @@
+<?php
+    include "config/config.php";
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -5,11 +8,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SENAI Integra - Login</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Google Fonts (Outfit) -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <script>
@@ -74,11 +74,9 @@
 
 <body class="relative flex flex-col items-center justify-center min-h-screen p-4 overflow-x-hidden selection:bg-brand-accent selection:text-white">
 
-    <!-- Efeitos de Luz de Fundo com as cores da paleta SENAI -->
     <div class="glow-bg w-[700px] h-[700px] top-[-250px] left-[-250px]"></div>
     <div class="glow-bg w-[600px] h-[600px] bottom-[-200px] right-[-200px]"></div>
     
-    <!-- Toast de Notificação customizado no tema Azul/Branco -->
     <div id="toast" class="fixed top-5 right-5 z-50 transform translate-y-[-150%] opacity-0 transition-all duration-500 ease-out flex items-center gap-3 bg-brand-dark1 border border-brand-accent/40 text-white px-5 py-4 rounded-2xl shadow-[0_10px_35px_rgba(0,92,169,0.15)] max-w-sm">
         <div id="toast-icon-container" class="p-2 rounded-xl bg-brand-accent/20 text-brand-accent">
             <i data-lucide="info" class="w-5 h-5"></i>
@@ -89,16 +87,12 @@
         </div>
     </div>
 
-    <!-- Container Principal -->
     <main class="relative z-10 w-full max-w-md my-auto">
         
-        <!-- Card do Formulário de Acesso -->
         <div class="bg-brand-dark1/90 backdrop-blur-2xl border border-brand-dark4/50 rounded-3xl p-6 sm:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.6)] relative overflow-hidden">
             
-            <!-- Linha decorativa no topo (Azul SENAI Oficial) -->
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-accent to-transparent"></div>
 
-            <!-- Header / Logo SENAI Integra -->
             <div class="flex flex-col items-center justify-center mb-8">
                 <div class="inline-flex items-center gap-2 mb-3 group cursor-default">
                     <div class="w-11 h-11 bg-brand-dark2 rounded-xl flex items-center justify-center border border-brand-accent/30 group-hover:border-brand-accent transition-colors shadow-[0_0_15px_rgba(0,92,169,0.2)]">
@@ -112,9 +106,7 @@
                 <p class="text-xs text-brand-dark5 font-light text-center">Conecte-se ao ecossistema de aprendizado industrial.</p>
             </div>
 
-            <!-- Seletor de Perfis (Tabs Industriais) -->
             <div class="bg-brand-bg p-1 rounded-2xl border border-brand-dark4/40 flex items-center mb-6 relative">
-                <!-- Indicador deslizante de fundo ativo -->
                 <div id="tab-indicator" class="absolute top-1 bottom-1 left-1 w-[31%] bg-brand-accent border border-brand-accentHover rounded-xl tab-transition shadow-[0_4px_12px_rgba(0,92,169,0.3)]"></div>
 
                 <button type="button" onclick="switchProfile('aluno', 0)" class="relative z-10 flex-1 py-2.5 text-xs font-bold rounded-xl text-white flex flex-col sm:flex-row items-center justify-center gap-1.5 tab-transition focus:outline-none">
@@ -131,10 +123,8 @@
                 </button>
             </div>
 
-            <!-- Formulário Dinâmico -->
-            <form onsubmit="handleLogin(event)" class="space-y-4">
+            <form id="login-form" action="api/cadastros/login_alunos.php" method="POST" onsubmit="handleLogin(event)" class="space-y-4">
                 
-                <!-- Campo de Identificação Dinâmico -->
                 <div>
                     <label id="input-label" for="login-id" class="block text-sm font-semibold text-gray-300 mb-1.5 ml-1">Matrícula / RA</label>
                     <div class="relative">
@@ -148,7 +138,6 @@
                     </div>
                 </div>
 
-                <!-- Campo de Senha -->
                 <div>
                     <div class="flex items-center justify-between mb-1.5 ml-1">
                         <label for="password" class="block text-sm font-semibold text-gray-300">Senha de Acesso</label>
@@ -161,14 +150,12 @@
                         <input type="password" id="password" name="password" placeholder="••••••••" required
                             class="w-full pl-11 pr-12 py-3 bg-brand-dark2 border border-brand-dark4/60 rounded-xl text-white placeholder-brand-dark5 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all duration-300">
                         
-                        <!-- Botão mostrar/ocultar senha -->
                         <button type="button" onclick="togglePassword()" class="absolute inset-y-0 right-0 pr-4 flex items-center text-brand-dark5 hover:text-white transition-colors focus:outline-none">
                             <i data-lucide="eye" id="eye-icon" class="w-5 h-5"></i>
                         </button>
                     </div>
                 </div>
 
-                <!-- Manter Conectado Checkbox -->
                 <div class="flex items-center ml-1 py-1">
                     <label class="inline-flex items-center cursor-pointer select-none">
                         <input type="checkbox" class="sr-only peer" name="remember">
@@ -177,15 +164,20 @@
                     </label>
                 </div>
 
-                <!-- Botão de Login (Azul SENAI com Texto Branco) -->
                 <button type="submit" id="btn-submit"
                     class="w-full flex items-center justify-center gap-2 bg-brand-accent hover:bg-brand-accentHover text-white font-bold py-3.5 px-4 rounded-xl transition-all duration-300 shadow-[0_5px_15px_rgba(0,92,169,0.2)] hover:shadow-[0_5px_20px_rgba(0,92,169,0.4)] hover:-translate-y-0.5 mt-2">
                     <span id="btn-text">Entrar no Portal</span>
                     <i data-lucide="arrow-right" class="w-5 h-5"></i>
                 </button>
+
+                <div class="text-center text-sm pt-1">
+                    <span class="text-brand-dark5">Não tem uma conta?</span>
+                    <a href="pages/cadastros/cadastro_aluno.php" id="btn-register-aluno" class="font-medium text-brand-accent hover:text-white transition-colors ml-1">Cadastre-se</a>
+                    <a href="pages/cadastros/cadastro_professor.php" id="btn-register-professor" class="hidden font-medium text-brand-accent hover:text-white transition-colors ml-1">Cadastre-se</a>
+                    <a href="pages/cadastros/cadastro_cordenacao.php" id="btn-register-gestao" class="hidden font-medium text-brand-accent hover:text-white transition-colors ml-1">Cadastre-se</a>
+                </div>
             </form>
 
-            <!-- Rodapé do Card -->
             <div class="mt-6 pt-5 border-t border-brand-dark4/40 text-center">
                 <p class="text-xs text-brand-dark5">
                     Primeiro acesso ou precisa de ajuda técnica? 
@@ -196,7 +188,6 @@
             </div>
         </div>
         
-        <!-- Texto de Copyright fora do card -->
         <p class="text-center text-[10px] text-brand-dark5 mt-6 font-light uppercase tracking-widest">
             © 2026 Portal SENAI Integra. Todos os direitos reservados.
         </p>
@@ -243,26 +234,39 @@
                 }
             });
 
-            // 3. Atualizar Labels, placeholders e ícones correspondentes
+            // 3. Obter as referências dos elementos que vão mudar
             const label = document.getElementById('input-label');
             const input = document.getElementById('login-id');
             const iconContainer = document.getElementById('input-icon-container');
+            const loginForm = document.getElementById('login-form'); // Obtendo o formulário
 
+            // 4. Ocultar todos os botões de cadastro primeiro
+            document.getElementById('btn-register-aluno').classList.add('hidden');
+            document.getElementById('btn-register-professor').classList.add('hidden');
+            document.getElementById('btn-register-gestao').classList.add('hidden');
+
+            // 5. Aplicar as mudanças com base no perfil escolhido
             if (profile === 'aluno') {
                 label.textContent = 'Matrícula / RA';
                 input.placeholder = 'Ex: 2401832-9';
                 input.type = 'text';
                 iconContainer.innerHTML = '<i data-lucide="hash" id="field-icon" class="w-5 h-5"></i>';
+                document.getElementById('btn-register-aluno').classList.remove('hidden');
+                loginForm.action = 'api/cadastros/login_alunos.php'; // Atualiza a rota
             } else if (profile === 'professor') {
                 label.textContent = 'NIF / E-mail';
                 input.placeholder = 'Ex: 9283748 ou prof.silva@senai.br';
                 input.type = 'text';
                 iconContainer.innerHTML = '<i data-lucide="user-check" id="field-icon" class="w-5 h-5"></i>';
+                document.getElementById('btn-register-professor').classList.remove('hidden');
+                loginForm.action = 'api/cadastros/login_professores.php'; // Atualiza a rota
             } else if (profile === 'gestao') {
                 label.textContent = 'E-mail Corporativo';
                 input.placeholder = 'Ex: nome.sobrenome@senai.br';
                 input.type = 'email';
                 iconContainer.innerHTML = '<i data-lucide="mail" id="field-icon" class="w-5 h-5"></i>';
+                document.getElementById('btn-register-gestao').classList.remove('hidden');
+                loginForm.action = 'api/cadastros/login_cordenacao.php'; // Atualiza a rota
             }
 
             // Recria apenas os ícones atualizados na mudança dinâmica
@@ -341,6 +345,10 @@
                     `Seja bem-vindo ao portal, ${profileNames[activeProfile]}!`, 
                     'check-circle'
                 );
+
+                // IMPORTANTE: Envia de fato o POST para o servidor após as animações do front-end terminarem
+                event.target.submit(); 
+                
             }, 1200);
         }
     </script>

@@ -4,12 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SENAI Integra - Cadastro de Aluno</title>
-    <!-- Tailwind CSS -->
+    <title>SENAI Integra - Cadastro de Professor</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Google Fonts (Outfit) -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <script>
@@ -69,37 +66,30 @@
 
 <body class="relative flex flex-col items-center justify-center min-h-screen p-4 overflow-x-hidden selection:bg-brand-accent selection:text-white">
 
-    <!-- Efeitos de Luz de Fundo com as cores da paleta SENAI -->
     <div class="glow-bg w-[700px] h-[700px] top-[-250px] left-[-250px]"></div>
     <div class="glow-bg w-[600px] h-[600px] bottom-[-200px] right-[-200px]"></div>
 
-    <!-- Container Principal -->
     <main class="relative z-10 w-full max-w-md my-auto py-8">
         
-        <!-- Card do Formulário de Cadastro -->
         <div class="bg-brand-dark1/90 backdrop-blur-2xl border border-brand-dark4/50 rounded-3xl p-6 sm:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.6)] relative overflow-hidden">
             
-            <!-- Linha decorativa no topo (Azul SENAI Oficial) -->
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-accent to-transparent"></div>
 
-            <!-- Header / Logo SENAI Integra -->
             <div class="flex flex-col items-center justify-center mb-6">
                 <div class="inline-flex items-center gap-2 mb-3 group cursor-default">
                     <div class="w-11 h-11 bg-brand-dark2 rounded-xl flex items-center justify-center border border-brand-accent/30 group-hover:border-brand-accent transition-colors shadow-[0_0_15px_rgba(0,92,169,0.2)]">
-                        <i data-lucide="user-plus" class="text-brand-accent w-6 h-6"></i>
+                        <i data-lucide="briefcase" class="text-brand-accent w-6 h-6"></i>
                     </div>
                     <span class="text-2xl font-black tracking-wider text-white uppercase">
                         senai<span class="text-brand-accent lowercase font-light">integra</span>
                     </span>
                 </div>
-                <h1 class="text-xl font-bold text-white mb-1">Cadastro de Aluno</h1>
-                <p class="text-xs text-brand-dark5 font-light text-center">Preencha os dados abaixo para criar sua conta.</p>
+                <h1 class="text-xl font-bold text-white mb-1">Cadastro de Professor</h1>
+                <p class="text-xs text-brand-dark5 font-light text-center">Preencha os dados abaixo para criar sua conta docente.</p>
             </div>
 
-            <!-- Formulário de Cadastro -->
-            <form method="POST" action="../../api/cadastros/cadastrar_alunos.php" class="space-y-4">
+            <form method="POST" action="../../api/cadastros/cadastrar_professores.php" class="space-y-4">
                 
-                <!-- Campo: Nome -->
                 <div>
                     <label for="nome" class="block text-sm font-semibold text-gray-300 mb-1.5 ml-1">Nome Completo</label>
                     <div class="relative">
@@ -111,7 +101,6 @@
                     </div>
                 </div>
 
-                <!-- Campo: Email -->
                 <div>
                     <label for="email" class="block text-sm font-semibold text-gray-300 mb-1.5 ml-1">E-mail</label>
                     <div class="relative">
@@ -123,19 +112,17 @@
                     </div>
                 </div>
 
-                <!-- Campo: Matrícula -->
                 <div>
-                    <label for="matricula" class="block text-sm font-semibold text-gray-300 mb-1.5 ml-1">Matrícula</label>
+                    <label for="idp" class="block text-sm font-semibold text-gray-300 mb-1.5 ml-1">IDP</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                             <i data-lucide="hash" class="w-5 h-5 text-brand-dark5"></i>
                         </div>
-                        <input type="text" id="matricula" name="matricula" placeholder="Insira sua matricula" required
+                        <input type="text" id="idp" name="idp" placeholder="Insira seu IDP" required
                             class="w-full pl-11 pr-4 py-3 bg-brand-dark2 border border-brand-dark4/60 rounded-xl text-white placeholder-brand-dark5 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all duration-300">
                     </div>
                 </div>
 
-                <!-- Campo: Senha -->
                 <div>
                     <label for="senha" class="block text-sm font-semibold text-gray-300 mb-1.5 ml-1">Senha de Acesso</label>
                     <div class="relative">
@@ -145,21 +132,18 @@
                         <input type="password" id="senha" name="senha" placeholder="Insira sua senha" required
                             class="w-full pl-11 pr-12 py-3 bg-brand-dark2 border border-brand-dark4/60 rounded-xl text-white placeholder-brand-dark5 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all duration-300">
                         
-                        <!-- Botão mostrar/ocultar senha -->
                         <button type="button" onclick="togglePassword()" class="absolute inset-y-0 right-0 pr-4 flex items-center text-brand-dark5 hover:text-white transition-colors focus:outline-none">
                             <i data-lucide="eye" id="eye-icon" class="w-5 h-5"></i>
                         </button>
                     </div>
                 </div>
 
-                <!-- Botão de Enviar -->
                 <button type="submit"
                     class="w-full flex items-center justify-center gap-2 bg-brand-accent hover:bg-brand-accentHover text-white font-bold py-3.5 px-4 rounded-xl transition-all duration-300 shadow-[0_5px_15px_rgba(0,92,169,0.2)] hover:shadow-[0_5px_20px_rgba(0,92,169,0.4)] hover:-translate-y-0.5 mt-4">
-                    <span>Enviar</span>
+                    <span>Cadastrar</span>
                     <i data-lucide="check-circle" class="w-5 h-5"></i>
                 </button>
 
-                <!-- Link de Voltar -->
                 <div class="text-center text-sm pt-2">
                     <span class="text-brand-dark5">Já tem uma conta?</span>
                     <a href="../../login.php" class="font-medium text-brand-accent hover:text-white transition-colors ml-1">Entrar</a>
@@ -167,7 +151,6 @@
             </form>
         </div>
         
-        <!-- Texto de Copyright fora do card -->
         <p class="text-center text-[10px] text-brand-dark5 mt-6 font-light uppercase tracking-widest">
             © 2026 Portal SENAI Integra. Todos os direitos reservados.
         </p>
