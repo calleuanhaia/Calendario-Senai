@@ -21,7 +21,7 @@
                 $_SESSION['usuario_email'] = $usuario['email'];
                 $_SESSION['usuario_tipo'] = 'coordenacao';
 
-                header("Location: ../../login.php");
+                header("Location: ../../index.php");
                 exit();
             } else {
                 header("Location: ../../login.php?erro=credenciais");

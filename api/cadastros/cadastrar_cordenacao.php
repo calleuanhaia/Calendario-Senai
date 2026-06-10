@@ -11,7 +11,7 @@
             $env=$pdo->prepare($cadastrar);
             $env->execute();
 
-            header("Location: ../../index.php");
+            header("Location: ../../login.php");
             exit();
         } catch(PDOException $e){
             echo "Erro: ".$e->getMessage();
